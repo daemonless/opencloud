@@ -7,6 +7,6 @@ chown -R bsd:bsd /config
 
 # Generate default config if missing
 if [ ! -d /config/opencloud ]; then
-  su -l bsd -c "/app/opencloud init --insecure yes" || true
+  HOME=/config s6-setuidgid bsd /app/opencloud init --insecure yes || true
 fi
 
