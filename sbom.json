@@ -1,11 +1,11 @@
 {
-  "generated": "2026-05-21T01:13:04Z",
+  "generated": "2026-05-21T21:44:48Z",
   "image": "opencloud",
   "tags": {
     "latest": {
-      "app_version": "6.2.0",
+      "app_version": "7.0.0",
       "arch": "amd64",
-      "generated": "2026-05-21T01:11:48Z",
+      "generated": "2026-05-21T21:43:28Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -397,7 +397,7 @@
           },
           {
             "name": "github.com/cyphar/filepath-securejoin",
-            "version": "v0.5.1"
+            "version": "v0.6.1"
           },
           {
             "name": "github.com/deckarep/golang-set",
@@ -489,11 +489,11 @@
           },
           {
             "name": "github.com/go-git/go-billy/v5",
-            "version": "v5.8.0"
+            "version": "v5.9.0"
           },
           {
             "name": "github.com/go-git/go-git/v5",
-            "version": "v5.18.0"
+            "version": "v5.19.1"
           },
           {
             "name": "github.com/go-ini/ini",
@@ -501,7 +501,7 @@
           },
           {
             "name": "github.com/go-jose/go-jose/v3",
-            "version": "v3.0.4"
+            "version": "v3.0.5"
           },
           {
             "name": "github.com/go-jose/go-jose/v4",
@@ -769,7 +769,7 @@
           },
           {
             "name": "github.com/klauspost/cpuid/v2",
-            "version": "v2.2.11"
+            "version": "v2.3.0"
           },
           {
             "name": "github.com/klauspost/crc32",
@@ -985,7 +985,7 @@
           },
           {
             "name": "github.com/opencloud-eu/reva/v2",
-            "version": "v2.44.0"
+            "version": "v2.46.0"
           },
           {
             "name": "github.com/opencloud-eu/secure",
@@ -1029,7 +1029,7 @@
           },
           {
             "name": "github.com/pjbgf/sha1cd",
-            "version": "v0.3.2"
+            "version": "v0.6.0"
           },
           {
             "name": "github.com/pkg/errors",
@@ -1137,7 +1137,7 @@
           },
           {
             "name": "github.com/shamaton/msgpack/v2",
-            "version": "v2.4.0"
+            "version": "v2.4.1"
           },
           {
             "name": "github.com/shurcooL/httpfs",
@@ -1201,7 +1201,7 @@
           },
           {
             "name": "github.com/tidwall/gjson",
-            "version": "v1.18.0"
+            "version": "v1.19.0"
           },
           {
             "name": "github.com/tidwall/match",
@@ -1285,15 +1285,15 @@
           },
           {
             "name": "go.etcd.io/etcd/api/v3",
-            "version": "v3.6.10"
+            "version": "v3.6.11"
           },
           {
             "name": "go.etcd.io/etcd/client/pkg/v3",
-            "version": "v3.6.10"
+            "version": "v3.6.11"
           },
           {
             "name": "go.etcd.io/etcd/client/v3",
-            "version": "v3.6.10"
+            "version": "v3.6.11"
           },
           {
             "name": "go.opencensus.io",
@@ -1369,15 +1369,15 @@
           },
           {
             "name": "golang.org/x/exp",
-            "version": "v0.0.0-20250210185358-939b2ce775ac"
+            "version": "v0.0.0-20260410095643-746e56fc9e2f"
           },
           {
             "name": "golang.org/x/image",
-            "version": "v0.38.0"
+            "version": "v0.40.0"
           },
           {
             "name": "golang.org/x/net",
-            "version": "v0.52.0"
+            "version": "v0.53.0"
           },
           {
             "name": "golang.org/x/oauth2",
@@ -1397,7 +1397,7 @@
           },
           {
             "name": "golang.org/x/text",
-            "version": "v0.36.0"
+            "version": "v0.37.0"
           },
           {
             "name": "golang.org/x/time",
