@@ -1,0 +1,106 @@
+ARG BASE_VERSION=15
+
+ARG UPSTREAM_URL="https://api.github.com/repos/opencloud-eu/opencloud/releases/latest"
+ARG UPSTREAM_JQ=".tag_name"
+ARG TARBALL_JQ=".tarball_url"
+
+FROM ghcr.io/daemonless/base:${BASE_VERSION} AS builder
+
+ARG GOPROXY=""
+ENV GOPROXY=${GOPROXY:-https://proxy.golang.org,direct}
+
+
+# Install build tools
+RUN pkg update && pkg install -y FreeBSD-set-devel bash go126 gmake npm-node24 git && \
+    pkg clean -ay && rm -rf /var/cache/pkg/* /var/db/pkg/repos/*
+
+ARG UPSTREAM_URL
+ARG UPSTREAM_JQ
+ARG TARBALL_JQ
+
+RUN fetch -qo /latest.json "${UPSTREAM_URL}" && \
+    echo $(jq -r "${UPSTREAM_JQ}" /latest.json) > /version && \
+    echo $(jq -r "${TARBALL_JQ}" /latest.json) > /tarball_url
+
+ARG CACHB=2
+# Fetch and extract source tarball
+RUN fetch -qo /tmp/opencloud.tar.gz "$(cat /tarball_url)" && \
+    mkdir -m 0755 /opencloud && \
+    tar -C /opencloud -xzf /tmp/opencloud.tar.gz --strip-components 1
+
+RUN ln -sf /usr/local/bin/go126 /usr/local/bin/go
+
+WORKDIR /opencloud
+
+RUN npm install --global corepack@latest && corepack enable pnpm
+
+COPY ./patches /patches/
+
+RUN for f in $(find /patches -name "*.patch");do \
+      patch < $f; \
+    done
+
+RUN EDITION=rolling gmake clean generate
+RUN EDITION=rolling gmake -C opencloud build
+
+
+FROM ghcr.io/daemonless/base:${BASE_VERSION}
+
+ARG UPSTREAM_URL
+ARG UPSTREAM_JQ
+ARG FREEBSD_ARCH=amd64
+ARG PACKAGES=""
+ARG APP_VERSION="latest"
+
+LABEL org.opencontainers.image.title="OpenCloud" \
+      org.opencontainers.image.description="{{ description }}" \
+      org.opencontainers.image.source="https://github.com/daemonless/opencloud" \
+      org.opencontainers.image.url="{{ web_url }}" \
+      org.opencontainers.image.licenses="Apache-2.0" \
+      org.opencontainers.image.vendor="daemonless" \
+      org.opencontainers.image.authors="daemonless" \
+      io.daemonless.category="Utilities" \
+{%- if ports %}
+      io.daemonless.port="{{ ports[0].target }}" \
+{%- endif %}
+      io.daemonless.arch="${FREEBSD_ARCH}" \
+      io.daemonless.upstream-url="${UPSTREAM_URL}" \
+      io.daemonless.upstream-jq="${UPSTREAM_JQ}" \
+      io.daemonless.packages="${PACKAGES}" \
+      io.daemonless.wip="true"
+      
+
+## Install dependencies
+#RUN pkg update && \
+#    pkg install -y ${PACKAGES} && \
+#    pkg clean -ay && \
+#    rm -rf /var/cache/pkg/* /var/db/pkg/repos/*
+
+# Download and install opencloud
+#RUN fetch -qo /tmp/opencloud.tar.gz "${DOWNLOAD_URL}" && 
+#    mkdir -p /usr/local/share/opencloud && 
+#    tar -xzf /tmp/opencloud.tar.gz -C /usr/local/share/opencloud --strip-components=1 && 
+#    rm /tmp/opencloud.tar.gz && 
+#    echo "${APP_VERSION}" > /app/version
+
+# Copy executable from builder stage
+COPY --from=builder --chmod=0755 --chown=bsd:bsd /opencloud/opencloud/bin/opencloud /app/opencloud
+
+# Record version information
+RUN su -m bsd -c "/app/opencloud version --skip-services 2>/dev/null" | sed -n 's/^Version: \(.*\)\+.*$/\1/p' > /app/version
+
+# Copy root filesystem
+COPY root/ /
+
+# Set permissions
+RUN chmod +x /etc/services.d/opencloud/run /healthz
+
+# --- Expose (Injected by Generator) ---
+{%- if ports %}
+EXPOSE {{ ports | map(attribute='target') | join(' ') }}
+{%- endif %}
+
+# --- Volumes (Injected by Generator) ---
+{%- if volumes %}
+VOLUME {{ volumes | map(attribute='path') | join(' ') }}
+{%- endif %}

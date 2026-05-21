@@ -1,0 +1,9 @@
+#!/bin/sh
+# Daemonless standard healthcheck for opencloud
+
+# CIT Mock Mode (Tokenless): Check TCP port
+if nc -z 127.0.0.1 "9200" >/dev/null 2>&1; then
+    exit 0
+else
+    exit 1
+fi

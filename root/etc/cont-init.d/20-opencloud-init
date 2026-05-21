@@ -1,0 +1,12 @@
+#!/bin/sh
+# Initialize OpenCloud config
+
+# Ensure directories exist and have correct ownership
+mkdir -p /config
+chown -R bsd:bsd /config
+
+# Generate default config if missing
+if [ ! -d /config/opencloud ]; then
+  su -l bsd -c "/app/opencloud init --insecure yes" || true
+fi
+

@@ -1,0 +1,63 @@
+name: opencloud
+
+x-daemonless:
+  title: "OpenCloud"
+  icon: ":material-apps:"  # https://pictogrammers.com/library/mdi/ (material-) or https://simpleicons.org/ (simple-)
+  category: "Utilities"
+  description: "OpenCloud is a modern file-sync and share platform."
+  upstream_url: "https://github.com/daemonless/opencloud"
+  web_url: "https://opencloud.eu/"
+  user: "bsd"
+  mlock: false
+  community: "Discord:https://discord.gg/Kb9tkhecZT"
+  appjail: true
+
+  docs:
+    env:
+      PUID: "User ID for the application process"
+      PGID: "Group ID for the application process"
+      TZ: "Timezone for the container"
+      OC_URL: "URL where OpenCloud can be accessed"
+    volumes:
+      /config: "Configuration directory"
+    ports:
+      9200: "Web UI"
+
+  notes: |
+    ## First run
+    OpenCloud generates a default config with insecure settings (not TLS validation) on first start
+    or if the `/config/.opencloud` directory does not exist.  
+    
+    You can find the initial admin password in the logs or in `/config/.opencloud/config/opencloud.yaml`.
+
+    ## Remarks
+    So far I have only tested this image with `bridge` networking.  
+    You may need to add an `extra_host` to your compose file to allow opencloud to connect to it's internal IDP.
+    That is at least what I had to do.
+    ```yaml
+    services:
+      opencloud:
+        extra_hosts:
+          - "host-hostname:127.0.0.1"
+    ```
+
+services:
+  opencloud:
+    image: ghcr.io/daemonless/opencloud:latest
+    container_name: opencloud
+    restart: unless-stopped
+
+
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+      - OC_URL=https://hostname:9200
+    extra_hosts:
+       - "hostname:127.0.0.1"
+
+    volumes:
+      - /path/to/containers/opencloud:/config
+
+    ports:
+      - 9200:9200

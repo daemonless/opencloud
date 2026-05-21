@@ -1,0 +1,17 @@
+#!/bin/sh
+# OpenCloud s6 service
+
+#if [ -z "$TUNNEL_TOKEN" ]; then
+#    echo "[WARN] TUNNEL_TOKEN is not set. Starting in CIT mock mode."
+#    # Log version to prove binary is functional
+#    /usr/local/bin/opencloud --version
+#    # Listen on port 8080 to satisfy CI port check
+#    exec /usr/bin/nc -lk 0.0.0.0 8080
+#fi
+
+echo "[INFO] Starting opencloud..."
+
+HOME=/config
+
+# Standard start command for opencloud
+exec /usr/local/bin/s6-notifyoncheck -c /healthz /usr/local/bin/s6-setuidgid bsd /app/opencloud server

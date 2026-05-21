@@ -1,0 +1,43 @@
+#!/bin/sh
+exit 0
+echo "Initializing config for test"
+if [ "x${CIT_RUN}" == "x" ]; then
+  # If we are not running as a cit test, exit and do not overwrite the config
+  exit 0
+fi
+
+echo "Writing config for test"
+# Write a minimal config for testing app startup
+cat << EOF > /config/authelia.yml
+---
+server:
+  address: 'tcp://:9099/'
+identity_validation:
+  reset_password:
+    jwt_secret: 'a_very_important_secret'
+authentication_backend:
+  file:
+    path: '/config/users_database.yml'
+access_control:
+  default_policy: 'one_factor'
+session:
+  secret: 'insecure_session_secret'
+  cookies:
+    -
+      name: 'authelia_session'
+      domain: 'example.com'
+      authelia_url: 'https://auth.example.com'
+  redis:
+    host: '127.0.0.1'
+    port: 6379
+storage:
+  encryption_key: 'you_must_generate_a_random_string_of_more_than_twenty_chars_and_configure_this'
+  local:
+    path: '/config/db.sqlite3'
+notifier:
+  filesystem:
+    filename: '/config/notification.txt'
+...
+EOF
+
+chown bsd:bsd /config/authelia.yml
