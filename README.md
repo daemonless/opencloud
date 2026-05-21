@@ -150,6 +150,9 @@ podman run -d --name opencloud \
 |------|----------|-------------|
 | `9200` | TCP | Web UI |
 
+## Upgrade from 6.2.0 to 7.0.0
+The upgrade requires a change to the configuration of the "sharing" service. Please follow the steps outlined in the [Upgrade Guide](https://docs.opencloud.eu/docs/admin/maintenance/upgrade/upgrade-guide#verify-configuration-changes) to achieve that.
+
 ## First run
 OpenCloud generates a default config with insecure settings (not TLS validation) on first start
 or if the `/config/.opencloud` directory does not exist.  
@@ -175,6 +178,8 @@ services:
     extra_hosts:
       - "host-hostname:127.0.0.1"
 ```
+## Additional environment variables
+To configure OpenCloud further, you can check out the list of [environment variables](https://docs.opencloud.eu/docs/next/dev/server/services/web/environment-variables).
 
 
 **Architectures:** amd64

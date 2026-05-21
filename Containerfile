@@ -46,6 +46,7 @@ RUN for f in $(find /patches -name "*.patch");do \
       patch < $f; \
     done
 
+RUN go install github.com/bwplotka/bingo@latest
 RUN EDITION=rolling gmake clean generate
 RUN EDITION=rolling gmake -C opencloud build
 
