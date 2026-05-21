@@ -28,7 +28,16 @@ x-daemonless:
     OpenCloud generates a default config with insecure settings (not TLS validation) on first start
     or if the `/config/.opencloud` directory does not exist.  
     
-    You can find the initial admin password in the logs or in `/config/.opencloud/config/opencloud.yaml`.
+    You can define the inital password for the `admin` user by setting the environment variable `IDM_ADMIN_PASSWORD` like this:
+    ```yaml
+    services:
+      opencloud:
+        environment:
+          - IDM_ADMIN_PASSWORD=<your_admin_password>
+    ```
+
+    If you do not set the password with the variable above, OpenCloud generates a random password for the `admin` user and
+    you can find it in the logs or in the file `/config/.opencloud/config/opencloud.yaml`.
 
     ## Remarks
     So far I have only tested this image with `bridge` networking.  
