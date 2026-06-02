@@ -1,11 +1,11 @@
 {
-  "generated": "2026-05-21T21:44:48Z",
+  "generated": "2026-06-02T15:48:11Z",
   "image": "opencloud",
   "tags": {
     "latest": {
-      "app_version": "7.0.0",
+      "app_version": "7.1.0",
       "arch": "amd64",
-      "generated": "2026-05-21T21:43:28Z",
+      "generated": "2026-06-02T15:46:56Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -51,7 +51,7 @@
           },
           {
             "name": "FreeBSD-libcasper",
-            "version": "15.0"
+            "version": "15.0p9"
           },
           {
             "name": "FreeBSD-libexecinfo",
@@ -95,7 +95,7 @@
           },
           {
             "name": "FreeBSD-runtime",
-            "version": "15.0p8"
+            "version": "15.0p9"
           },
           {
             "name": "FreeBSD-tcpd",
@@ -107,7 +107,7 @@
           },
           {
             "name": "FreeBSD-utilities",
-            "version": "15.0p1"
+            "version": "15.0p9"
           },
           {
             "name": "FreeBSD-xz-lib",
@@ -127,7 +127,7 @@
           },
           {
             "name": "ca_root_nss",
-            "version": "3.123.1"
+            "version": "3.124"
           },
           {
             "name": "execline",
@@ -693,7 +693,7 @@
           },
           {
             "name": "github.com/grpc-ecosystem/grpc-gateway/v2",
-            "version": "v2.28.0"
+            "version": "v2.29.0"
           },
           {
             "name": "github.com/hashicorp/go-hclog",
@@ -797,7 +797,7 @@
           },
           {
             "name": "github.com/leonelquinteros/gotext",
-            "version": "v1.7.2"
+            "version": "v1.7.3-0.20260422134830-b012b4ccae69"
           },
           {
             "name": "github.com/lestrrat-go/blackmagic",
@@ -985,7 +985,7 @@
           },
           {
             "name": "github.com/opencloud-eu/reva/v2",
-            "version": "v2.46.0"
+            "version": "v2.46.2-0.20260602061404-0e975e5456eb"
           },
           {
             "name": "github.com/opencloud-eu/secure",
@@ -1077,7 +1077,7 @@
           },
           {
             "name": "github.com/riandyrn/otelchi",
-            "version": "v0.12.2"
+            "version": "v0.12.3"
           },
           {
             "name": "github.com/rogpeppe/go-internal",
@@ -1305,7 +1305,7 @@
           },
           {
             "name": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc",
-            "version": "v0.68.0"
+            "version": "v0.69.0"
           },
           {
             "name": "go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp",
@@ -1317,15 +1317,15 @@
           },
           {
             "name": "go.opentelemetry.io/otel",
-            "version": "v1.43.0"
+            "version": "v1.44.0"
           },
           {
             "name": "go.opentelemetry.io/otel/exporters/otlp/otlptrace",
-            "version": "v1.43.0"
+            "version": "v1.44.0"
           },
           {
             "name": "go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc",
-            "version": "v1.43.0"
+            "version": "v1.44.0"
           },
           {
             "name": "go.opentelemetry.io/otel/exporters/stdout/stdouttrace",
@@ -1333,15 +1333,15 @@
           },
           {
             "name": "go.opentelemetry.io/otel/metric",
-            "version": "v1.43.0"
+            "version": "v1.44.0"
           },
           {
             "name": "go.opentelemetry.io/otel/sdk",
-            "version": "v1.43.0"
+            "version": "v1.44.0"
           },
           {
             "name": "go.opentelemetry.io/otel/trace",
-            "version": "v1.43.0"
+            "version": "v1.44.0"
           },
           {
             "name": "go.opentelemetry.io/proto/otlp",
@@ -1365,7 +1365,7 @@
           },
           {
             "name": "golang.org/x/crypto",
-            "version": "v0.50.0"
+            "version": "v0.51.0"
           },
           {
             "name": "golang.org/x/exp",
@@ -1377,7 +1377,7 @@
           },
           {
             "name": "golang.org/x/net",
-            "version": "v0.53.0"
+            "version": "v0.55.0"
           },
           {
             "name": "golang.org/x/oauth2",
@@ -1389,11 +1389,11 @@
           },
           {
             "name": "golang.org/x/sys",
-            "version": "v0.43.0"
+            "version": "v0.45.0"
           },
           {
             "name": "golang.org/x/term",
-            "version": "v0.42.0"
+            "version": "v0.43.0"
           },
           {
             "name": "golang.org/x/text",
@@ -1409,15 +1409,15 @@
           },
           {
             "name": "google.golang.org/genproto/googleapis/api",
-            "version": "v0.0.0-20260401024825-9d38bb4040a9"
+            "version": "v0.0.0-20260526163538-3dc84a4a5aaa"
           },
           {
             "name": "google.golang.org/genproto/googleapis/rpc",
-            "version": "v0.0.0-20260406210006-6f92a3bedf2d"
+            "version": "v0.0.0-20260526163538-3dc84a4a5aaa"
           },
           {
             "name": "google.golang.org/grpc",
-            "version": "v1.80.0"
+            "version": "v1.81.1"
           },
           {
             "name": "google.golang.org/protobuf",
