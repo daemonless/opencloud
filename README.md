@@ -150,8 +150,8 @@ podman run -d --name opencloud \
 |------|----------|-------------|
 | `9200` | TCP | Web UI |
 
-!!! warning "Work in Progress"
-  This image is functional but may change significantly in a future release.
+!!! warning "Work in Progress"  
+This image is functional but may change significantly in a future release.
 
 ## Breaking changes
 ### untagged -> 0.1.0
