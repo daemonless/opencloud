@@ -14,8 +14,8 @@ fi
 # Generate default config if missing
 if [ ! -d /config/config ]; then
   mv /config/.opencloud/* /config
-  if $?; then
-    rm -r .config/.opencloud
+  if [ "$?" -eq 0 ]; then
+    rm -r /config/.opencloud
   fi
   echo "[move-config] OpenCloud config and data moved from /config/.opencloud to /config"
 fi
