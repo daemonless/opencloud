@@ -28,14 +28,16 @@ x-daemonless:
       This image is functional but may change significantly in a future release.
 
     ## Breaking changes
-    - 
+    ### untagged -> 0.1.0
+    - `config` and data directories moved from `/config/.opencloud` to `/config`  
+      Existing data will be moved automatically during container initialization.
 
     ## Upgrade from 6.2.0 to 7.0.0
     The upgrade requires a change to the configuration of the "sharing" service. Please follow the steps outlined in the [Upgrade Guide](https://docs.opencloud.eu/docs/admin/maintenance/upgrade/upgrade-guide#verify-configuration-changes) to achieve that.
 
     ## First run
-    OpenCloud generates a default config with insecure settings (not TLS validation) on first start
-    or if the `/config/.opencloud` directory does not exist.  
+    OpenCloud generates a default config with insecure settings (no TLS validation) on first start
+    or if the file `/config/config/opencloud.yaml` does not exist.  
     
     You can define the inital password for the `admin` user by setting the environment variable `IDM_ADMIN_PASSWORD` like this:
     ```yaml
@@ -46,7 +48,7 @@ x-daemonless:
     ```
 
     If you do not set the password with the variable above, OpenCloud generates a random password for the `admin` user and
-    you can find it in the logs or in the file `/config/.opencloud/config/opencloud.yaml`.
+    you can find it in the logs or in the file `/config/config/opencloud.yaml`.
 
     ## Remarks
     So far I have only tested this image with `bridge` networking.  
