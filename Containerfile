@@ -25,10 +25,9 @@ ARG UPSTREAM_JQ
 ARG TARBALL_JQ
 
 RUN fetch -qo /latest.json "${UPSTREAM_URL}" && \
-    echo $(jq -r "${UPSTREAM_JQ}" /latest.json) > /version && \
+    echo $(jq -r "${UPSTREAM_JQ}" /latest.json | sed  's/v//') > /version && \
     echo $(jq -r "${TARBALL_JQ}" /latest.json) > /tarball_url
 
-ARG CACHB=2
 # Fetch and extract source tarball
 RUN fetch -qo /tmp/opencloud.tar.gz "$(cat /tarball_url)" && \
     mkdir -m 0755 /opencloud && \
@@ -47,8 +46,11 @@ RUN for f in $(find /patches -name "*.patch");do \
     done
 
 RUN go install github.com/bwplotka/bingo@latest
-RUN EDITION=rolling gmake clean generate
-RUN EDITION=rolling gmake -C opencloud build
+
+ARG EDITION=rolling
+
+RUN EDITION="${EDITION}" gmake clean generate VERSION=$(cat /version)
+RUN EDITION="${EDITION}" gmake -C opencloud build VERSION=$(cat /version)
 
 
 FROM ghcr.io/daemonless/base:${BASE_VERSION}
@@ -92,13 +94,16 @@ LABEL org.opencontainers.image.title="OpenCloud" \
 COPY --from=builder --chmod=0755 --chown=bsd:bsd /opencloud/opencloud/bin/opencloud /app/opencloud
 
 # Record version information
-RUN su -m bsd -c "/app/opencloud version --skip-services 2>/dev/null" | sed -n 's/^Version: \(.*\)\+.*$/\1/p' > /app/version
+RUN su -m bsd -c "/app/opencloud version --skip-services 2>/dev/null" | sed -n 's/^Version: \(.*\)$/\1/p' > /app/version
 
 # Copy root filesystem
 COPY root/ /
 
 # Set permissions
 RUN chmod +x /etc/services.d/opencloud/run /healthz
+
+ENV OC_CONFIG_DIR=${OC_CONFIG_DIR:-/config/config/}
+ENV OC_BASE_DATA_PATH=${OC_BASE_DATA_PATH:-/config/}
 
 # --- Expose (Injected by Generator) ---
 EXPOSE 9200

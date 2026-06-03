@@ -43,8 +43,8 @@ RUN go install github.com/bwplotka/bingo@latest
 
 ARG EDITION=rolling
 
-RUN EDITION="${EDITION}" VERSION=${cat /version) gmake clean generate
-RUN EDITION="${EDITION}" VERSION=${cat /version) gmake -C opencloud build
+RUN EDITION="${EDITION}" gmake clean generate VERSION=$(cat /version)
+RUN EDITION="${EDITION}" gmake -C opencloud build VERSION=$(cat /version)
 
 
 FROM ghcr.io/daemonless/base:${BASE_VERSION}
@@ -90,7 +90,7 @@ LABEL org.opencontainers.image.title="OpenCloud" \
 COPY --from=builder --chmod=0755 --chown=bsd:bsd /opencloud/opencloud/bin/opencloud /app/opencloud
 
 # Record version information
-RUN su -m bsd -c "/app/opencloud version --skip-services 2>/dev/null" | sed -n 's/^Version: \(.*\)\+.*$/\1/p' > /app/version
+RUN su -m bsd -c "/app/opencloud version --skip-services 2>/dev/null" | sed -n 's/^Version: \(.*\)$/\1/p' > /app/version
 
 # Copy root filesystem
 COPY root/ /
