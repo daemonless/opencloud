@@ -6,7 +6,7 @@ mkdir -p /config
 chown -R bsd:bsd /config
 
 # Generate default config if missing
-if [ ! -d /config/opencloud ]; then
+if [ ! -f /config/config/opencloud.yaml ]; then
   HOME=/config s6-setuidgid bsd /app/opencloud init --insecure yes || true
 fi
 
