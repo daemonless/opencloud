@@ -1,11 +1,11 @@
 {
-  "generated": "2026-06-02T15:48:11Z",
+  "generated": "2026-06-03T09:13:35Z",
   "image": "opencloud",
   "tags": {
     "latest": {
       "app_version": "7.1.0",
       "arch": "amd64",
-      "generated": "2026-06-02T15:46:56Z",
+      "generated": "2026-06-03T09:12:18Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
