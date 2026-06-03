@@ -8,3 +8,12 @@
  	@cd ../.. && GOPATH="" GOBIN=".bingo" $(BINGO) get -l github.com/go-micro/generator/cmd/protoc-gen-micro
  	@cd ../.. && GOPATH="" GOBIN=".bingo" $(BINGO) get -l github.com/owncloud/protoc-gen-microweb
  	@cd ../.. && GOPATH="" GOBIN=".bingo" $(BINGO) get -l github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2
+@@ -16,7 +16,7 @@
+ .PHONY: buf-generate
+ buf-generate: $(SHA1_LOCK_FILE)
+ 	@find $(abspath $(CURDIR)/../../protogen/proto/) -type f -print0 | sort -z | xargs -0 sha1sum > buf.sha1.lock.tmp
+-	@cmp $(SHA1_LOCK_FILE) buf.sha1.lock.tmp --quiet || $(MAKE) -B $(SHA1_LOCK_FILE)
++	@cmp -s $(SHA1_LOCK_FILE) buf.sha1.lock.tmp || $(MAKE) -B $(SHA1_LOCK_FILE)
+ 	@rm -f buf.sha1.lock.tmp
+
+ $(SHA1_LOCK_FILE): $(BUF) protoc-deps
