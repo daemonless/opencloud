@@ -1,0 +1,23 @@
+#!/bin/sh
+# Initialize move the config and data from the old default location
+# 
+
+# Ensure directories exist and have correct ownership
+mkdir -p /config
+chown -R bsd:bsd /config
+
+if [ ! -d /config/.opencloud ]; then
+  # If there is no old directory with configuration and data
+  # we do not do anything
+  exit 0
+fi
+
+# Generate default config if missing
+if [ ! -d /config/config ]; then
+  mv /config/.opencloud/* /config
+  if $?; then
+    rm -r .config/.opencloud
+  fi
+  echo "[move-config] OpenCloud config and data moved from /config/.opencloud to /config"
+fi
+

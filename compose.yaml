@@ -24,6 +24,12 @@ x-daemonless:
       9200: "Web UI"
 
   notes: |
+    !!! warning "Work in Progress"
+      This image is functional but may change significantly in a future release.
+
+    ## Breaking changes
+    - 
+
     ## Upgrade from 6.2.0 to 7.0.0
     The upgrade requires a change to the configuration of the "sharing" service. Please follow the steps outlined in the [Upgrade Guide](https://docs.opencloud.eu/docs/admin/maintenance/upgrade/upgrade-guide#verify-configuration-changes) to achieve that.
 

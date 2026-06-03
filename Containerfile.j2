@@ -96,6 +96,9 @@ COPY root/ /
 # Set permissions
 RUN chmod +x /etc/services.d/opencloud/run /healthz
 
+ENV OC_CONFIG_DIR=${OC_CONFIG_DIR:-/config/config/}
+ENV OC_BASE_DATA_PATH=${OC_BASE_DATA_PATH:-/config/}
+
 # --- Expose (Injected by Generator) ---
 {%- if ports %}
 EXPOSE {{ ports | map(attribute='target') | join(' ') }}
