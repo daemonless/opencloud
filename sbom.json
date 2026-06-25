@@ -1,11 +1,11 @@
 {
-  "generated": "2026-06-24T13:35:33Z",
+  "generated": "2026-06-25T10:27:03Z",
   "image": "opencloud",
   "tags": {
     "latest": {
-      "app_version": "7.1.0",
+      "app_version": "7.2.0",
       "arch": "amd64",
-      "generated": "2026-06-24T13:34:15Z",
+      "generated": "2026-06-25T10:25:48Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -581,7 +581,7 @@
           },
           {
             "name": "github.com/go-playground/validator/v10",
-            "version": "v10.30.2"
+            "version": "v10.30.3"
           },
           {
             "name": "github.com/go-redis/redis/v8",
@@ -597,7 +597,7 @@
           },
           {
             "name": "github.com/go-viper/mapstructure/v2",
-            "version": "v2.4.0"
+            "version": "v2.5.0"
           },
           {
             "name": "github.com/gobwas/glob",
@@ -896,10 +896,6 @@
             "version": "v1.2.0"
           },
           {
-            "name": "github.com/mitchellh/mapstructure",
-            "version": "v1.5.0"
-          },
-          {
             "name": "github.com/mitchellh/reflectwalk",
             "version": "v1.0.2"
           },
@@ -985,7 +981,7 @@
           },
           {
             "name": "github.com/opencloud-eu/reva/v2",
-            "version": "v2.46.2-0.20260602061404-0e975e5456eb"
+            "version": "v2.46.6"
           },
           {
             "name": "github.com/opencloud-eu/secure",
@@ -1365,7 +1361,7 @@
           },
           {
             "name": "golang.org/x/crypto",
-            "version": "v0.51.0"
+            "version": "v0.52.0"
           },
           {
             "name": "golang.org/x/exp",
@@ -1467,14 +1463,14 @@
       "summary": {
         "dotnet": 0,
         "freebsd": 36,
-        "go": 325,
+        "go": 324,
         "java": 0,
         "node": 0,
         "php": 0,
         "python": 0,
         "ruby": 0,
         "rust": 0,
-        "total": 361
+        "total": 360
       }
     }
   }
