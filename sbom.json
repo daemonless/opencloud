@@ -1,11 +1,11 @@
 {
-  "generated": "2026-07-14T22:46:26Z",
+  "generated": "2026-07-27T22:20:50Z",
   "image": "opencloud",
   "tags": {
     "latest": {
       "app_version": "7.3.0",
       "arch": "amd64",
-      "generated": "2026-07-14T22:45:09Z",
+      "generated": "2026-07-27T22:19:33Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -67,6 +67,10 @@
           },
           {
             "name": "FreeBSD-libucl",
+            "version": "15.0"
+          },
+          {
+            "name": "FreeBSD-locales",
             "version": "15.0"
           },
           {
@@ -1458,7 +1462,7 @@
       "source": "upstream",
       "summary": {
         "dotnet": 0,
-        "freebsd": 36,
+        "freebsd": 37,
         "go": 323,
         "java": 0,
         "node": 0,
@@ -1466,7 +1470,7 @@
         "python": 0,
         "ruby": 0,
         "rust": 0,
-        "total": 359
+        "total": 360
       }
     }
   }
