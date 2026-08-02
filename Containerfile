@@ -94,7 +94,7 @@ LABEL org.opencontainers.image.title="OpenCloud" \
 COPY --from=builder --chmod=0755 --chown=bsd:bsd /opencloud/opencloud/bin/opencloud /app/opencloud
 
 # Record version information
-RUN su -m bsd -c "/app/opencloud version --skip-services 2>/dev/null" | sed -n 's/^Version: \(.*\)$/\1/p' > /app/version
+RUN s6-setuidgid bsd /app/opencloud version --skip-services 2>/dev/null | sed -n 's/^Version: \(.*\)$/\1/p' > /app/version
 
 # Copy root filesystem
 COPY root/ /

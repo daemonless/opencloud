@@ -18,13 +18,11 @@ OpenCloud is a modern file-sync and share platform.
 | **Website** | [https://opencloud.eu/](https://opencloud.eu/) |
 
 ## Version Tags
-
 | Tag | Description | Best For |
 | :--- | :--- | :--- |
 | `latest` | **Upstream Binary**. Built from official release. | Most users. Matches Linux Docker behavior. |
 
 ## Prerequisites
-
 Before deploying, ensure your host environment is ready. See the [Quick Start Guide](https://daemonless.io/guides/quick-start) for host setup instructions.
 
 ## Deployment
@@ -34,25 +32,26 @@ Before deploying, ensure your host environment is ready. See the [Quick Start Gu
 ```yaml
 services:
   opencloud:
-    image: ghcr.io/daemonless/opencloud:latest
+    image: "ghcr.io/daemonless/opencloud:latest"
     container_name: opencloud
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=UTC
-      - OC_URL=https://hostname:9200
+      - PUID=1000  # User ID for the application process
+      - PGID=1000  # Group ID for the application process
+      - TZ=UTC  # Timezone for the container
+      - OC_URL=https://hostname:9200  # URL where OpenCloud can be accessed
     volumes:
       - "/path/to/containers/opencloud:/config"
     ports:
-      - 9200:9200
+      - "9200:9200"
     restart: unless-stopped
 ```
 
 ### AppJail Director
-
 **.env**:
 
 ```
+# .env
+
 DIRECTOR_PROJECT=opencloud
 PUID=1000
 PGID=1000
@@ -63,6 +62,8 @@ OC_URL=https://hostname:9200
 **appjail-director.yml**:
 
 ```yaml
+# appjail-director.yml
+
 options:
   - virtualnet: ':<random> default'
   - nat:
@@ -71,6 +72,7 @@ services:
     name: opencloud
     options:
       - container: 'boot args:--pull'
+      - expose: '9200:9200 proto:tcp' \
     oci:
       user: root
       environment:
@@ -88,11 +90,14 @@ volumes:
 **Makejail**:
 
 ```
+# Makejail
+
 ARG tag=latest
 
 OPTION overwrite=force
 OPTION from=ghcr.io/daemonless/opencloud:${tag}
 ```
+**Note**: Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the IPv4 address assigned by the virtual network.
 
 ### Podman CLI
 
@@ -107,13 +112,31 @@ podman run -d --name opencloud \
   ghcr.io/daemonless/opencloud:latest
 ```
 
+### AppJail
+
+```bash
+appjail oci run -Pd \
+  -o overwrite=force \
+  -o container="args:--pull" \
+  -o virtualnet=":<random> default" \
+  -o nat \
+  -o expose="9200:9200 proto:tcp" \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=UTC \
+  -e OC_URL=https://hostname:9200 \
+  -o fstab="/path/to/containers/opencloud /config <pseudofs>" \
+  ghcr.io/daemonless/opencloud:latest opencloud
+```
+**Note**: Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the IPv4 address assigned by the virtual network.
+
 ### Ansible
 
 ```yaml
 - name: Deploy opencloud
   containers.podman.podman_container:
     name: opencloud
-    image: ghcr.io/daemonless/opencloud:latest
+    image: "ghcr.io/daemonless/opencloud:latest"
     state: started
     restart_policy: always
     env:
@@ -126,6 +149,8 @@ podman run -d --name opencloud \
     volumes:
       - "/path/to/containers/opencloud:/config"
 ```
+
+Access at: `http://localhost:9200`
 
 ## Parameters
 
@@ -192,7 +217,7 @@ To configure OpenCloud further, you can check out the list of [environment varia
 
 **Architectures:** amd64
 **User:** `bsd` (UID/GID via PUID/PGID, defaults to 1000:1000)
-**Base:** FreeBSD 15.0
+**Base:** FreeBSD 15
 
 ---
 
