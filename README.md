@@ -20,7 +20,7 @@ OpenCloud is a modern file-sync and share platform.
 ## Version Tags
 | Tag | Description | Best For |
 | :--- | :--- | :--- |
-| `latest` | **Upstream Binary**. Built from official release. | Most users. Matches Linux Docker behavior. |
+| `latest` | **Upstream Binary**. Built from official release. | Most users — recommended. |
 
 ## Prerequisites
 Before deploying, ensure your host environment is ready. See the [Quick Start Guide](https://daemonless.io/guides/quick-start) for host setup instructions.
@@ -72,7 +72,7 @@ services:
     name: opencloud
     options:
       - container: 'boot args:--pull'
-      - expose: '9200:9200 proto:tcp' \
+      - expose: '9200:9200 proto:tcp'
     oci:
       user: root
       environment:
