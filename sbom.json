@@ -1,11 +1,11 @@
 {
-  "generated": "2026-09-04T23:17:37Z",
+  "generated": "2026-09-15T18:11:31Z",
   "image": "opencloud",
   "tags": {
     "latest": {
-      "app_version": "7.5.0",
+      "app_version": "8.0.0",
       "arch": "amd64",
-      "generated": "2026-09-04T23:16:55Z",
+      "generated": "2026-09-15T18:10:55Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -238,7 +238,7 @@
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.127"
+            "version": "3.129"
           },
           {
             "licenses": [
@@ -317,7 +317,7 @@
           {
             "name": "github.com/KimMachineGun/automemlimit",
             "purl": "",
-            "version": "v0.7.5"
+            "version": "v1.0.0"
           },
           {
             "name": "github.com/Masterminds/goutils",
@@ -412,17 +412,17 @@
           {
             "name": "github.com/blevesearch/bleve/v2",
             "purl": "",
-            "version": "v2.6.0"
+            "version": "v2.6.1"
           },
           {
             "name": "github.com/blevesearch/bleve_index_api",
             "purl": "",
-            "version": "v1.3.11"
+            "version": "v1.4.1"
           },
           {
             "name": "github.com/blevesearch/geo",
             "purl": "",
-            "version": "v0.2.5"
+            "version": "v0.2.6"
           },
           {
             "name": "github.com/blevesearch/go-porterstemmer",
@@ -442,7 +442,7 @@
           {
             "name": "github.com/blevesearch/scorch_segment_api/v2",
             "purl": "",
-            "version": "v2.4.7"
+            "version": "v2.4.10"
           },
           {
             "name": "github.com/blevesearch/segment",
@@ -497,7 +497,7 @@
           {
             "name": "github.com/blevesearch/zapx/v17",
             "purl": "",
-            "version": "v17.1.2"
+            "version": "v17.2.3"
           },
           {
             "name": "github.com/bluele/gcache",
@@ -1247,7 +1247,7 @@
           {
             "name": "github.com/nats-io/nats.go",
             "purl": "",
-            "version": "v1.52.0"
+            "version": "v1.53.1"
           },
           {
             "name": "github.com/nats-io/nkeys",
@@ -1292,7 +1292,7 @@
           {
             "name": "github.com/open-policy-agent/opa",
             "purl": "",
-            "version": "v1.19.0"
+            "version": "v1.19.1"
           },
           {
             "name": "github.com/opencloud-eu/go-micro-plugins/v4/store/nats-js-kv",
@@ -1307,7 +1307,7 @@
           {
             "name": "github.com/opencloud-eu/libre-graph-api-go",
             "purl": "",
-            "version": "v1.0.8-0.20260818063016-69f82a7dde55"
+            "version": "v1.0.8-0.20260902170011-45af3945a067"
           },
           {
             "name": "github.com/opencloud-eu/opencloud",
@@ -1317,7 +1317,7 @@
           {
             "name": "github.com/opencloud-eu/reva/v2",
             "purl": "",
-            "version": "v2.49.0"
+            "version": "v2.50.0"
           },
           {
             "name": "github.com/opencloud-eu/secure",
@@ -1327,7 +1327,7 @@
           {
             "name": "github.com/opensearch-project/opensearch-go/v4",
             "purl": "",
-            "version": "v4.6.0"
+            "version": "v4.7.3"
           },
           {
             "name": "github.com/opentracing/opentracing-go",
@@ -1388,11 +1388,6 @@
             "name": "github.com/pquerna/cachecontrol",
             "purl": "",
             "version": "v0.2.0"
-          },
-          {
-            "name": "github.com/prometheus/alertmanager",
-            "purl": "",
-            "version": "v0.33.1"
           },
           {
             "name": "github.com/prometheus/client_golang",
@@ -1512,7 +1507,7 @@
           {
             "name": "github.com/sirupsen/logrus",
             "purl": "",
-            "version": "v1.10.0"
+            "version": "v1.10.1"
           },
           {
             "name": "github.com/skeema/knownhosts",
@@ -1707,17 +1702,17 @@
           {
             "name": "go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp",
             "purl": "",
-            "version": "v0.70.0"
+            "version": "v0.71.0"
           },
           {
             "name": "go.opentelemetry.io/contrib/zpages",
             "purl": "",
-            "version": "v0.70.0"
+            "version": "v0.71.0"
           },
           {
             "name": "go.opentelemetry.io/otel",
             "purl": "",
-            "version": "v1.45.0"
+            "version": "v1.46.0"
           },
           {
             "name": "go.opentelemetry.io/otel/exporters/otlp/otlptrace",
@@ -1737,17 +1732,17 @@
           {
             "name": "go.opentelemetry.io/otel/metric",
             "purl": "",
-            "version": "v1.45.0"
+            "version": "v1.46.0"
           },
           {
             "name": "go.opentelemetry.io/otel/sdk",
             "purl": "",
-            "version": "v1.45.0"
+            "version": "v1.46.0"
           },
           {
             "name": "go.opentelemetry.io/otel/trace",
             "purl": "",
-            "version": "v1.45.0"
+            "version": "v1.46.0"
           },
           {
             "name": "go.opentelemetry.io/proto/otlp",
@@ -1842,7 +1837,7 @@
           {
             "name": "google.golang.org/grpc",
             "purl": "",
-            "version": "v1.83.1"
+            "version": "v1.83.2"
           },
           {
             "name": "google.golang.org/protobuf",
@@ -1892,7 +1887,7 @@
           {
             "name": "stdlib",
             "purl": "",
-            "version": "v1.26.7"
+            "version": "v1.26.8"
           }
         ],
         "java": [],
@@ -1906,14 +1901,14 @@
       "summary": {
         "dotnet": 0,
         "freebsd": 39,
-        "go": 322,
+        "go": 321,
         "java": 0,
         "node": 0,
         "php": 0,
         "python": 0,
         "ruby": 0,
         "rust": 0,
-        "total": 361
+        "total": 360
       }
     }
   }
