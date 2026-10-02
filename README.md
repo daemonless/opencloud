@@ -41,7 +41,7 @@ services:
       - TZ=UTC  # Timezone for the container
       - OC_URL=https://hostname:9200  # URL where OpenCloud can be accessed
     volumes:
-      - "/path/to/containers/opencloud:/config"
+      - "/containers/opencloud:/config"
     ports:
       - "9200:9200"
     # always (not unless-stopped) so FreeBSD's podman rc.d auto-starts it at boot
@@ -88,7 +88,7 @@ services:
       - opencloud: /config
 volumes:
   opencloud:
-    device: '/path/to/containers/opencloud'
+    device: '/containers/opencloud'
 ```
 
 **Makejail**:
@@ -104,47 +104,6 @@ OPTION from=ghcr.io/daemonless/opencloud:${tag}
 ```
 
 Save the files above, then run `appjail-director up`.
-
-
-> [!WARNING]
-> Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the jail's IPv4 address or hostname assigned by the virtual network.
->
-> To avoid exposing ports, just remove the `expose` option in your `appjail-director.yml` or from your command-line arguments.
-
-### Podman CLI
-
-```bash
-podman run -d --name opencloud \
-  -p 9200:9200 \
-  -e PUID=1000 \
-  -e PGID=1000 \
-  -e TZ=UTC \
-  -e OC_URL=https://hostname:9200 \
-  -v /path/to/containers/opencloud:/config \
-  ghcr.io/daemonless/opencloud:latest
-```
-
-Save as `run.sh`, then run `sh run.sh`.
-
-### AppJail
-
-
-```bash
-appjail oci run -Pd \
-  -o overwrite=force \
-  -o container="args:--pull" \
-  -o virtualnet=":<random> default" \
-  -o nat \
-  -o expose="9200:9200 proto:tcp" \
-  -e PUID=1000 \
-  -e PGID=1000 \
-  -e TZ=UTC \
-  -e OC_URL=https://hostname:9200 \
-  -o fstab="/path/to/containers/opencloud /config <pseudofs>" \
-  ghcr.io/daemonless/opencloud:latest opencloud
-```
-
-Save the files above, then run `sh run.sh`.
 
 
 > [!WARNING]
@@ -170,42 +129,10 @@ services:
       - TZ=UTC
       - OC_URL=https://hostname:9200
     volumes:
-      - "/path/to/containers/opencloud:/config"
+      - "/containers/opencloud:/config"
 ```
 
-Save as `bastille-compose.yml`, then run `bastille up`. Or via CLI:
-
-```bash
-bastille create -O \
-  --env PUID=1000 \
-  --env PGID=1000 \
-  --env TZ=UTC \
-  --env OC_URL=https://hostname:9200 \
-  --volume /path/to/containers/opencloud /config \
-  opencloud ghcr.io/daemonless/opencloud:latest inherit
-```
-
-### Ansible
-
-```yaml
-- name: Deploy opencloud
-  containers.podman.podman_container:
-    name: opencloud
-    image: "ghcr.io/daemonless/opencloud:latest"
-    state: started
-    restart_policy: always
-    env:
-      PUID: "1000"
-      PGID: "1000"
-      TZ: "UTC"
-      OC_URL: "https://hostname:9200"
-    ports:
-      - "9200:9200"
-    volumes:
-      - "/path/to/containers/opencloud:/config"
-```
-
-Save as `opencloud-deploy.yaml`, then run `ansible-playbook opencloud-deploy.yaml`.
+Save as `bastille-compose.yml`, then run `bastille up`.
 
 Access at: `http://localhost:9200`
 
