@@ -10,11 +10,10 @@ ARG UPSTREAM_URL="https://api.github.com/repos/opencloud-eu/opencloud/releases/l
 ARG UPSTREAM_JQ=".tag_name"
 ARG TARBALL_JQ=".tarball_url"
 
-FROM ghcr.io/daemonless/base:${BASE_VERSION} AS builder
+FROM ghcr.io/daemonless/base-exec:${BASE_VERSION} AS builder
 
 ARG GOPROXY=""
 ENV GOPROXY=${GOPROXY:-https://proxy.golang.org,direct}
-
 
 # Install build tools
 RUN pkg update && pkg install -y FreeBSD-set-devel bash go126 gmake npm-node24 git && \
@@ -52,8 +51,7 @@ ARG EDITION=rolling
 RUN EDITION="${EDITION}" gmake clean generate VERSION=$(cat /version)
 RUN EDITION="${EDITION}" gmake -C opencloud build VERSION=$(cat /version)
 
-
-FROM ghcr.io/daemonless/base:${BASE_VERSION}
+FROM ghcr.io/daemonless/base-exec:${BASE_VERSION}
 
 ARG UPSTREAM_URL
 ARG UPSTREAM_JQ
@@ -94,13 +92,16 @@ LABEL org.opencontainers.image.title="OpenCloud" \
 COPY --from=builder --chmod=0755 --chown=bsd:bsd /opencloud/opencloud/bin/opencloud /app/opencloud
 
 # Record version information
-RUN s6-setuidgid bsd /app/opencloud version --skip-services 2>/dev/null | sed -n 's/^Version: \(.*\)$/\1/p' > /app/version
+RUN dsu bsd /app/opencloud version --skip-services 2>/dev/null | sed -n 's/^Version: \(.*\)$/\1/p' > /app/version
 
 # Copy root filesystem
 COPY root/ /
+RUN chmod +x /daemonless/libexec/opencloud /daemonless/init.d/*
+
+CMD ["/daemonless/libexec/opencloud"]
 
 # Set permissions
-RUN chmod +x /etc/services.d/opencloud/run /healthz
+RUN chmod +x /healthz
 
 ENV OC_CONFIG_DIR=${OC_CONFIG_DIR:-/config/config/}
 ENV OC_BASE_DATA_PATH=${OC_BASE_DATA_PATH:-/config/}

@@ -1,9 +1,0 @@
-#!/bin/sh
-# OpenCloud s6 service
-
-echo "[INFO] Starting opencloud..."
-
-HOME=/config
-
-# Standard start command for opencloud
-exec /usr/local/bin/s6-notifyoncheck -c /healthz /usr/local/bin/s6-setuidgid bsd /app/opencloud server
