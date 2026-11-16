@@ -17,19 +17,21 @@ x-daemonless:
       PUID: "User ID for the application process"
       PGID: "Group ID for the application process"
       TZ: "Timezone for the container"
-      OC_URL: "URL where OpenCloud can be accessed"
+      OC_URL:
+        desc: "URL where OpenCloud can be accessed"
+        public_url: true
     volumes:
       /config: "Configuration directory"
     ports:
       9200: "Web UI"
 
   notes: |
-    !!! warning "Work in Progress"  
+    !!! warning "Work in Progress"
     This image is functional but may change significantly in a future release.
 
     ## Breaking changes
     ### untagged -> 0.1.0
-    - `config` and data directories moved from `/config/.opencloud` to `/config`  
+    - `config` and data directories moved from `/config/.opencloud` to `/config`
       Existing data will be moved automatically during container initialization.
 
     ## Upgrade from 6.2.0 to 7.0.0
@@ -37,8 +39,8 @@ x-daemonless:
 
     ## First run
     OpenCloud generates a default config with insecure settings (no TLS validation) on first start
-    or if the file `/config/config/opencloud.yaml` does not exist.  
-    
+    or if the file `/config/config/opencloud.yaml` does not exist.
+
     You can define the inital password for the `admin` user by setting the environment variable `IDM_ADMIN_PASSWORD` like this:
     ```yaml
     services:
@@ -51,7 +53,7 @@ x-daemonless:
     you can find it in the logs or in the file `/config/config/opencloud.yaml`.
 
     ## Remarks
-    So far I have only tested this image with `bridge` networking.  
+    So far I have only tested this image with `bridge` networking.
     You may need to add an `extra_host` to your compose file to allow opencloud to connect to it's internal IDP.
     That is at least what I had to do.
     ```yaml
@@ -69,14 +71,11 @@ services:
     container_name: opencloud
     restart: unless-stopped
 
-
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=UTC
-      - OC_URL=https://hostname:9200
-    extra_hosts:
-       - "hostname:127.0.0.1"
+      - OC_URL=https://localhost:9200
 
     volumes:
       - /path/to/containers/opencloud:/config

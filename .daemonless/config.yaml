@@ -13,5 +13,5 @@ build:
 cit:
   mode: health
   port: 9200
+  https: true
   health: /
-  
