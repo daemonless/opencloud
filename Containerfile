@@ -40,8 +40,8 @@ RUN npm install --global corepack@latest && corepack enable pnpm
 
 COPY ./patches /patches/
 
-RUN for f in $(find /patches -name "*.patch");do \
-      patch < $f; \
+RUN set -e; for f in $(find /patches -name "*.patch" | sort); do \
+      patch -t -N < "$f"; \
     done
 
 RUN go install github.com/bwplotka/bingo@latest
