@@ -1,11 +1,11 @@
 OcPrefix is "oc." on FreeBSD only to fix a 10 year hidden implementation error in pkg/xattr
 
---- ./vendor/github.com/opencloud-eu/reva/v2/pkg/storage/fs/posix/tree/tree.go.orig	2026-03-20 14:49:58.980861000 +0100
-+++ ./vendor/github.com/opencloud-eu/reva/v2/pkg/storage/fs/posix/tree/tree.go	2026-03-20 14:50:37.035542000 +0100
-@@ -207,7 +207,7 @@
+--- ./vendor/github.com/opencloud-eu/reva/v3/pkg/storage/fs/posix/tree/tree.go.orig	2026-11-17 15:01:59.000000000 +0000
++++ ./vendor/github.com/opencloud-eu/reva/v3/pkg/storage/fs/posix/tree/tree.go	2026-11-21 00:00:00.000000000 +0000
+@@ -287,7 +287,7 @@
  		}
  	}()
- 
+
 -	attrKey := "user.posixfs.test"
 +	attrKey := prefixes.OcPrefix + "posixfs.test"
  	attrVal := []byte("test")
