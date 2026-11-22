@@ -1,11 +1,11 @@
 {
-  "generated": "2026-11-11T19:59:32Z",
+  "generated": "2026-11-22T01:19:48Z",
   "image": "opencloud",
   "tags": {
     "latest": {
-      "app_version": "9.1.0",
+      "app_version": "9.2.0",
       "arch": "amd64",
-      "generated": "2026-11-11T19:58:51Z",
+      "generated": "2026-11-22T01:19:01Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -273,7 +273,7 @@
               "BSD2CLAUSE"
             ],
             "name": "pkg",
-            "version": "2.8.4"
+            "version": "2.9.0"
           }
         ],
         "go": [
@@ -686,6 +686,11 @@
             "name": "github.com/go-chi/chi/v5",
             "purl": "",
             "version": "v5.4.0"
+          },
+          {
+            "name": "github.com/go-chi/httprate",
+            "purl": "",
+            "version": "v0.16.1"
           },
           {
             "name": "github.com/go-chi/render",
@@ -1303,9 +1308,9 @@
             "version": ""
           },
           {
-            "name": "github.com/opencloud-eu/reva/v2",
+            "name": "github.com/opencloud-eu/reva/v3",
             "purl": "",
-            "version": "v2.52.2"
+            "version": "v3.0.1"
           },
           {
             "name": "github.com/opencloud-eu/secure",
@@ -1880,7 +1885,7 @@
           {
             "name": "stdlib",
             "purl": "",
-            "version": "v1.26.10"
+            "version": "v1.26.11"
           }
         ],
         "java": [],
@@ -1894,14 +1899,14 @@
       "summary": {
         "dotnet": 0,
         "freebsd": 38,
-        "go": 321,
+        "go": 322,
         "java": 0,
         "node": 0,
         "php": 0,
         "python": 0,
         "ruby": 0,
         "rust": 0,
-        "total": 359
+        "total": 360
       }
     }
   }

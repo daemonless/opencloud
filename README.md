@@ -39,7 +39,7 @@ services:
       - PUID=1000  # User ID for the application process
       - PGID=1000  # Group ID for the application process
       - TZ=UTC  # Timezone for the container
-      - OC_URL=https://hostname:9200  # URL where OpenCloud can be accessed
+      - OC_URL=https://localhost:9200  # URL where OpenCloud can be accessed
     volumes:
       - "/containers/opencloud:/config"
     ports:
@@ -60,7 +60,7 @@ DIRECTOR_PROJECT=opencloud
 PUID=1000
 PGID=1000
 TZ=UTC
-OC_URL=https://hostname:9200
+OC_URL=https://localhost:9200
 ```
 
 **appjail-director.yml**:
@@ -127,7 +127,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=UTC
-      - OC_URL=https://hostname:9200
+      - OC_URL=https://localhost:9200
     volumes:
       - "/containers/opencloud:/config"
 ```
@@ -144,7 +144,7 @@ Open `http://<server>:9200` from another machine (the server's own browser can't
 | `PUID` | `1000` | User ID for the application process |
 | `PGID` | `1000` | Group ID for the application process |
 | `TZ` | `UTC` | Timezone for the container |
-| `OC_URL` | `https://hostname:9200` | URL where OpenCloud can be accessed |
+| `OC_URL` | `https://localhost:9200` | URL where OpenCloud can be accessed |
 
 ### Volumes
 
@@ -158,12 +158,12 @@ Open `http://<server>:9200` from another machine (the server's own browser can't
 |------|----------|-------------|
 | `9200` | TCP | Web UI |
 
-!!! warning "Work in Progress"  
+!!! warning "Work in Progress"
 This image is functional but may change significantly in a future release.
 
 ## Breaking changes
 ### untagged -> 0.1.0
-- `config` and data directories moved from `/config/.opencloud` to `/config`  
+- `config` and data directories moved from `/config/.opencloud` to `/config`
   Existing data will be moved automatically during container initialization.
 
 ## Upgrade from 6.2.0 to 7.0.0
@@ -171,7 +171,7 @@ The upgrade requires a change to the configuration of the "sharing" service. Ple
 
 ## First run
 OpenCloud generates a default config with insecure settings (no TLS validation) on first start
-or if the file `/config/config/opencloud.yaml` does not exist.  
+or if the file `/config/config/opencloud.yaml` does not exist.
 
 You can define the inital password for the `admin` user by setting the environment variable `IDM_ADMIN_PASSWORD` like this:
 ```yaml
@@ -185,7 +185,7 @@ If you do not set the password with the variable above, OpenCloud generates a ra
 you can find it in the logs or in the file `/config/config/opencloud.yaml`.
 
 ## Remarks
-So far I have only tested this image with `bridge` networking.  
+So far I have only tested this image with `bridge` networking.
 You may need to add an `extra_host` to your compose file to allow opencloud to connect to it's internal IDP.
 That is at least what I had to do.
 ```yaml
